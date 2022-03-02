@@ -4,13 +4,13 @@
   https://github.com/caisah/emacs.dz
   https://github.com/alhassy/emacs.d
 
-** Configuration
+
 
 In init.el we alredy have defined ~init-dir~ folder.
 
-*** initial
+** initial
 
-**** define location of Melpa packages
+*** define location of Melpa packages
 
     Define package source
 
@@ -27,7 +27,7 @@ In init.el we alredy have defined ~init-dir~ folder.
       (setq package-user-dir (expand-file-name "elpa" init-dir))
     #+end_src
 
-**** load use-package
+*** load use-package
 
 #+begin_src emacs-lisp
   (require 'package)
@@ -37,7 +37,7 @@ In init.el we alredy have defined ~init-dir~ folder.
     (package-install 'use-package))
 #+end_src
 
-***** bind key
+**** bind key
 
 Use package needs ~bind-key~
 
@@ -47,16 +47,16 @@ Use package needs ~bind-key~
 #+end_src
 
 
-*** customize
+** customize
 
-**** magit
+*** magit
 
 #+begin_src emacs-lisp
 ;; (use-package magit
 ;;   :ensure t)
 #+end_src
 
-**** helm descbinds
+*** helm descbinds
 
 #+begin_src emacs-lisp
   (use-package helm-descbinds
@@ -66,7 +66,37 @@ Use package needs ~bind-key~
 
 
 
-**** some shortcuts
+*** location of customize settings
+
+Config changes made through the customize UI will be stored here
+
+#+begin_src emacs-lisp
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (ignore-errors (load custom-file)) ;; It may not yet exist.
+#+end_src
+
+*** global ato revert
+
+Revert buffers automatically when underlying files are changed externally
+
+#+begin_src emacs-lisp
+  (global-auto-revert-mode t)
+#+end_src
+
+
+
+*** which key
+
+#+begin_example emacs-lisp
+  (use-package which-key
+    :ensure t
+    :config
+     (which-key-mode +1))
+#+end_example
+
+
+** GUI
+*** some shortcuts
 
 #+begin_src emacs-lisp
   ;; Font size
@@ -83,40 +113,7 @@ Use package needs ~bind-key~
 
 #+end_src
 
-**** location of customize settings
-
-Config changes made through the customize UI will be stored here
-
-#+begin_src emacs-lisp
-  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-  (ignore-errors (load custom-file)) ;; It may not yet exist.
-#+end_src
-
-
-**** global ato revert
-
-Revert buffers automatically when underlying files are changed externally
-
-#+begin_src emacs-lisp
-  (global-auto-revert-mode t)
-#+end_src
-
-
-
-
-**** which key
-
-#+begin_example emacs-lisp
-  (use-package which-key
-    :ensure t
-    :config
-     (which-key-mode +1))
-#+end_example
-
-
-*** GUI
-
-**** recent files
+*** recent files
 
 #+begin_src emacs-lisp
   (use-package recentf
@@ -129,7 +126,7 @@ Revert buffers automatically when underlying files are changed externally
 #+end_src
 
 
-**** ace window
+*** ace window
 
 #+begin_src emacs-lisp
   (use-package ace-window
@@ -143,14 +140,14 @@ Revert buffers automatically when underlying files are changed externally
     :bind ("C-x o" . ace-window))
 #+end_src
 
-**** y-or-n
+*** y-or-n
 
 #+begin_src emacs-lisp
   (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
 
-**** No splash screen
+*** No splash screen
 
 Don't show splash screen
 
@@ -158,7 +155,7 @@ Don't show splash screen
   (setq inhibit-startup-screen t)
 #+end_src
 
-**** window title
+*** window title
 
 More useful frame title, that show either a file or a buffer name (if the buffer
 isn't visiting a file)
@@ -170,7 +167,7 @@ isn't visiting a file)
 							 "%b"))))
 #+end_src
 
-**** mode flashing on overwrite
+*** mode flashing on overwrite
 
 #+begin_example emacs-lisp
   (defun double-flash-mode-line ()
@@ -183,14 +180,14 @@ isn't visiting a file)
   (add-hook 'overwrite-mode-hook #'(lambda () (double-flash-mode-line)))
 #+end_example
 
-**** turn off toolbar
+*** turn off toolbar
 
 #+begin_src emacs-lisp
   (tool-bar-mode -1)
 #+end_src
 
 
-*** Lisp
+** Lisp
 
 ** The end
 #+begin_src emacs-lisp
